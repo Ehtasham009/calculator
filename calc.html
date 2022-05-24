@@ -1,0 +1,93 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .items-holder{display: grid; grid-gap: 30px; grid-template-columns: repeat(5, 1fr);}
+    .item{font-size: 25px; color: #1d1d1d; background-color: #ccc; padding: 20px; cursor: pointer}
+    .result{background: #1d1d1d; color: #fff; font-size: 30px; width: 100%; height: 100px; margin-top: 30px; display: flex; gap: 10px;}
+</style>
+<body>
+    <div class="items-holder">
+        <button data-number>1</button>
+        <button data-number>2</button>
+        <button data-number>3</button>
+        <button data-number>4</button>
+        <button data-number>5</button>
+        <button data-number>6</button>
+        <button data-number>7</button>
+        <button data-number>8</button>
+        <button data-number>9</button>
+        <button data-number>0</button>
+        <button operator>+</button>
+        <button operator>-</button>
+        <button operator>/</button>
+        <button operator>*</button>
+        <button onclick="answer()">=</button>
+        <button onclick="clear()">clear</button>
+    </div>
+    <div class="result"></div>
+    <script>
+        const numberButton = document.querySelectorAll('[data-number]');
+        const result = document.querySelector('.result')
+        const value = document.createElement('div');
+        const value2 = document.createElement('div');
+        
+        const Operator = document.querySelectorAll('[operator]') ;
+        const operateValue = document.createElement('span');
+
+        let buttonData;
+        let operatorData;
+        let buttonData2;
+
+        var ans = document.createElement('div');
+
+        numberButton.forEach(button => {
+            button.addEventListener('click', () => {
+                
+                if(!operatorData){
+                    buttonData = button.innerText;
+                    result.appendChild(value);
+                    value.textContent = (buttonData);
+                }
+            })
+        });
+
+        Operator.forEach(button => {
+            button.addEventListener('click', () => {
+                operatorData = button.innerText;
+
+                result.appendChild(operateValue);
+                operateValue.textContent = (operatorData)
+            })
+        });
+
+        numberButton.forEach(button => {
+            button.addEventListener('click', () => {
+                
+                if (operatorData){
+                    buttonData2 = button.innerText;
+                    result.appendChild(value2);
+                    value2.textContent = (buttonData2)
+                }
+            })
+        })
+
+        const answer = () =>{
+            var finalAnswer = parseInt(buttonData) + parseInt(buttonData2);
+            
+            console.log(finalAnswer)
+            
+            result.appendChild(ans)
+            ans.innerText = ("= " + finalAnswer)
+
+            function clear (){
+                result.appendChild(ans)
+                ans.innerText = (" a ")
+            }
+        }        
+    </script>
+</body>
+</html>
